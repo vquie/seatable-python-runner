@@ -31,7 +31,7 @@ default: pull build tag
 ## login to the docker registry
 .PHONY: login
 login:
-	echo "$(CUSTOM_REGISTRY_PASSWORD)" | docker login $(REGISTRY_NAME) --username $(CUSTOM_REGISTRY_USERNAME) --password-stdin
+	echo "$(REGISTRY_PASSWORD)" | docker login $(REGISTRY_NAME) --username $(REGISTRY_USERNAME) --password-stdin
 
 ## pull the latest images from the registry
 .PHONY: pull
