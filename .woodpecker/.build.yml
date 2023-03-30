@@ -1,7 +1,7 @@
 ---
 pipeline:
   build:
-    image: docker:23.0.0
+    image: docker:23.0.2
     secrets:
       - REGISTRY_USERNAME
       - REGISTRY_PASSWORD
