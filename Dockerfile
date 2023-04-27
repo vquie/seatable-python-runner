@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 python:3.11.1-alpine
+FROM python:3.11.1-alpine
 
 RUN apk add --no-cache --upgrade bash \
                                  docker \

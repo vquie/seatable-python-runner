@@ -1,0 +1,43 @@
+---
+name: build and push
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install Docker
+        run: curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Dotenv Action
+        id: dotenv
+        uses: falti/dotenv-action@v1.0.4
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        env:
+          ACTIONS_RUNTIME_TOKEN: ''
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: VERSION=${{ steps.dotenv.outputs.version }}
+          push: true
+          tags: |
+            ${{ steps.dotenv.outputs.repo }}:latest
+            ${{ steps.dotenv.outputs.repo }}:${{ steps.dotenv.outputs.version }}
