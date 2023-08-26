@@ -1,4 +1,4 @@
-FROM python:3.11.4-alpine
+FROM python:3.11.5-alpine
 
 RUN apk add --no-cache --upgrade bash \
                                  docker \
