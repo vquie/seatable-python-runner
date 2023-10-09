@@ -30,7 +30,7 @@ jobs:
         uses: falti/dotenv-action@v1.0.4
 
       - name: Build and push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5
         env:
           ACTIONS_RUNTIME_TOKEN: ''
         with:
